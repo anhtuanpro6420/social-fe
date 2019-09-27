@@ -16,7 +16,7 @@ const Signup = React.lazy(() => import('./containers/Signup/Signup'));
 function App() {
 	let routes = (
 		<Switch>
-			<Route path="/auth" component={auth} />
+			<Route path="/auth/login" component={auth} />
 			<Route
 				path="/sign-up"
 				render={() => (
@@ -36,21 +36,21 @@ function App() {
 				<Menu
 					theme="dark"
 					mode="horizontal"
-					defaultSelectedKeys={['2']}
+					defaultSelectedKeys={['1']}
 					style={{ lineHeight: '64px' }}
 				>
 					<Menu.Item key="1">
 						<Link to="/products">Home</Link>
 					</Menu.Item>
 					<Menu.Item key="2">
-						<Link to="/auth">Login</Link>
+						<Link to="/auth/login">Login</Link>
 					</Menu.Item>
 					<Menu.Item key="3">
 						<Link to="/sign-up">Sign up</Link>
 					</Menu.Item>
 				</Menu>
 			</Header>
-			<Content style={{ padding: '0 50px', marginTop: 64 }}>
+			<Content style={{ padding: '50px', marginTop: 64 }}>
 				<div>{routes}</div>
 			</Content>
 		</Layout>

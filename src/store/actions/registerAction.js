@@ -8,7 +8,6 @@ export const register = userData => dispatch => {
 	axios
 		.post('/auth/register', userData)
 		.then(res => {
-			console.log(res);
 			dispatch({
 				type: REGISTER_SUCCESS,
 				payload: res.data

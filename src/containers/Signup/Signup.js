@@ -15,6 +15,12 @@ class Signup extends React.Component {
 		});
 	};
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.success) {
+			this.props.history.push('/auth/login');
+		}
+	}
+
 	render() {
 		const { getFieldDecorator } = this.props.form;
 		return (
@@ -75,7 +81,7 @@ class Signup extends React.Component {
 	}
 }
 
-const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Signup);
+const WrappedNormalLoginForm = Form.create({ name: 'normal_signup' })(Signup);
 
 const mapStateToProps = state => ({
 	success: state.register.success,

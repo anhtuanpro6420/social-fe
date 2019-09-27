@@ -8,26 +8,30 @@ import { openNotification } from '../../components/Notification/notification';
 const initialState = {
 	success: false,
 	error: null,
-	data: [],
+	data: null,
 	isLoading: false
 };
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case REGISTER_REQUEST: {
 			return {
-				...state
+				...state,
+				isLoading: true
 			};
 		}
 		case REGISTER_SUCCESS: {
 			return {
 				...state,
-				...action.payload
+				success: true,
+				isLoading: false
 			};
 		}
 		case REGISTER_FAILED: {
 			openNotification('error', action.payload.message);
 			return {
 				...state,
+				success: false,
+				isLoading: false,
 				error: action.payload
 			};
 		}
