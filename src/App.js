@@ -3,20 +3,25 @@ import { Route, Switch, Redirect, Link } from 'react-router-dom';
 
 import './App.css';
 import Products from './containers/Products/Products';
-import auth from './containers/Auth/Auth';
 import 'antd/dist/antd.css';
-// import Signup from './containers/Signup/Signup';
 import { Layout, Menu } from 'antd';
 
 const { Header, Content } = Layout;
 
 const Signup = React.lazy(() => import('./containers/Signup/Signup'));
-// import Signup from './containers/Signup/Signup';
+const Login = React.lazy(() => import('./containers/Login/Login'));
 
 function App() {
 	let routes = (
 		<Switch>
-			<Route path="/auth/login" component={auth} />
+			<Route
+				path="/auth/login"
+				render={() => (
+					<Suspense fallback={<div>Loading...</div>}>
+						<Login />
+					</Suspense>
+				)}
+			/>
 			<Route
 				path="/sign-up"
 				render={() => (
