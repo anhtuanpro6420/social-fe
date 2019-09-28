@@ -19,7 +19,8 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				success: true,
-				isLoading: false
+				isLoading: false,
+				data: action.payload.data
 			};
 		}
 		case LOGIN_FAILED: {

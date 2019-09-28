@@ -3,6 +3,7 @@ import { Form, Icon, Input, Button } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { login } from '../../../src/store/actions/loginAction';
+import storageService from '../../core/services/storageService';
 
 class Login extends React.Component {
 	handleSubmit = e => {
@@ -17,6 +18,9 @@ class Login extends React.Component {
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.success && nextProps.success !== this.props.success) {
+			const token = nextProps.data.token;
+			const email = nextProps.data.user.email;
+			storageService.setAuth(token, email);
 			this.props.history.push('/');
 		}
 	}
