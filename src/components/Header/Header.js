@@ -28,6 +28,11 @@ const header = () => (
 					<Link to="/auth/login">Login</Link>
 				</Menu.Item>
 			)}
+			{storageService.getCurrentUser() && (
+				<Menu.Item key="5">
+					<Link to="/share-video">Share Video</Link>
+				</Menu.Item>
+			)}
 			<Menu.Item key="3">
 				<Link to="/sign-up">Sign up</Link>
 			</Menu.Item>
