@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
-import Products from './containers/Products/Products';
 import 'antd/dist/antd.css';
+import Newsfeed from './containers/Newsfeed/Newsfeed';
 
 const Signup = React.lazy(() => import('./containers/Signup/Signup'));
 const Login = React.lazy(() => import('./containers/Login/Login'));
@@ -37,7 +37,7 @@ function App() {
 					</Suspense>
 				)}
 			/>
-			<Route path="/" exact component={Products} />
+			<Route path="/" exact component={Newsfeed} />
 			<Redirect to="/" />
 		</Switch>
 	);
