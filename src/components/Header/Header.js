@@ -5,8 +5,8 @@ import './Header.css';
 import HomeIcon from '../../assets/images/home-icon.svg';
 
 const header = () => (
-	<header className="Header">
-		<nav className="Nav">
+	<header className="header">
+		<nav className="nav">
 			<NavLink exact to="/">
 				<img src={HomeIcon} className="home-icon" alt="Funny movies" />{' '}
 				Funny Movies
@@ -17,7 +17,7 @@ const header = () => (
 						<span className="user-name">
 							Welcome {storageService.getCurrentUser()}
 						</span>
-						<NavLink to="/share-video">Share Video</NavLink>
+						<NavLink to="/share">Share Video</NavLink>
 						<NavLink
 							to="/auth/login"
 							onClick={storageService.removeAuth}

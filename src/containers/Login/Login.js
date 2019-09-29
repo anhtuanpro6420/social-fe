@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { login } from '../../../src/store/actions/loginAction';
 import storageService from '../../core/services/storageService';
 import Header from '../../components/Header/Header';
+import { PageHeader } from 'antd';
+
 const { Content } = Layout;
 
 class Login extends React.Component {
@@ -32,7 +34,8 @@ class Login extends React.Component {
 		return (
 			<Layout>
 				<Header />
-				<Content style={{ padding: '50px', marginTop: 64 }}>
+				<Content className="content-form" style={{ padding: '50px' }}>
+					<PageHeader title="Login" />
 					<Form onSubmit={this.handleSubmit} className="login-form">
 						<Form.Item>
 							{getFieldDecorator('email', {

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { shareVideo } from '../../../src/store/actions/shareVideoAction';
 import Header from '../../components/Header/Header';
+import { PageHeader } from 'antd';
+
 const { Content } = Layout;
 
 class ShareVideo extends React.Component {
@@ -23,7 +25,8 @@ class ShareVideo extends React.Component {
 		return (
 			<Layout>
 				<Header />
-				<Content style={{ padding: '50px', marginTop: 64 }}>
+				<Content className="content-form" style={{ padding: '50px' }}>
+					<PageHeader title="Share video" />
 					<Form
 						onSubmit={this.handleSubmit}
 						className="shareVideo-form"

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { register } from '../../../src/store/actions/registerAction';
 import Header from '../../components/Header/Header';
+import { PageHeader } from 'antd';
 
 const { Content } = Layout;
 
@@ -28,8 +29,9 @@ class Signup extends React.Component {
 		return (
 			<Layout>
 				<Header />
-				<Content style={{ padding: '50px', marginTop: 64 }}>
-					<Form onSubmit={this.handleSubmit} className="login-form">
+				<Content className="content-form" style={{ padding: '50px' }}>
+					<PageHeader title="Register" />
+					<Form onSubmit={this.handleSubmit} className="signup-form">
 						<Form.Item>
 							{getFieldDecorator('email', {
 								rules: [
@@ -76,7 +78,7 @@ class Signup extends React.Component {
 							<Button
 								type="primary"
 								htmlType="submit"
-								className="login-form-button"
+								className="signup-form-button"
 							>
 								Register
 							</Button>

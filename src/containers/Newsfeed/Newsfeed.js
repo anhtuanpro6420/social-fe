@@ -4,12 +4,25 @@ import { connect } from 'react-redux';
 import { getPosts } from '../../../src/store/actions/newsfeedAction';
 import Header from '../../components/Header/Header';
 import ReactPlayer from 'react-player';
+import './Newsfeed.css';
 const { Content } = Layout;
 
 class Newsfeed extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			clickedPost: null
+		};
+	}
 	componentDidMount() {
 		this.props.getPosts();
 	}
+
+	showMore = id => {
+		this.setState({
+			clickedPost: id
+		});
+	};
 	render() {
 		const posts =
 			this.props.data && this.props.data.length ? this.props.data : [];
@@ -27,17 +40,30 @@ class Newsfeed extends React.Component {
 					</Col>
 
 					<Col lg={12} md={12} sm={24}>
-						<p>
-							<strong className="title">{item.title}</strong>
-						</p>
-						<p>
-							<strong>Share by:</strong>{' '}
-							{item.userId && item.userId.email}
-						</p>
-						<strong>Description: </strong>
-						<p style={{ wordBreak: 'break-word' }}>
-							{item.description}
-						</p>
+						<h3 className="title">{item.title}</h3>
+						<h4>Share by: {item.user.email}</h4>
+						<h4>Description: </h4>
+						{item.description.length > 600 ? (
+							<>
+								{this.state.clickedPost === item._id ? (
+									item.description
+								) : (
+									<>
+										{item.description.slice(0, 600)}
+										<span
+											onClick={() =>
+												this.showMore(item._id)
+											}
+											className="show-more"
+										>
+											...Show more
+										</span>
+									</>
+								)}
+							</>
+						) : (
+							item.description
+						)}
 					</Col>
 				</Row>
 			);
@@ -45,9 +71,7 @@ class Newsfeed extends React.Component {
 		return (
 			<Layout>
 				<Header />
-				<Content style={{ padding: '50px', marginTop: 64 }}>
-					{postRender}
-				</Content>
+				<Content style={{ padding: '50px' }}>{postRender}</Content>
 			</Layout>
 		);
 	}
