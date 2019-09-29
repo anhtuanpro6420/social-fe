@@ -1,5 +1,6 @@
-let AUTH_TOKEN = 'AUTH_TOKEN';
-let CURRENT_USER = 'CURRENT_USER';
+import axios from '../../axios';
+const AUTH_TOKEN = 'AUTH_TOKEN';
+const CURRENT_USER = 'CURRENT_USER';
 
 class StorageService {
 	setAuth(token, email) {
@@ -19,6 +20,16 @@ class StorageService {
 	getCurrentUser() {
 		return localStorage.getItem(CURRENT_USER);
 	}
+
+	setAuthToken = () => {
+		if (this.getAuthToken()) {
+			axios.defaults.headers.common[
+				'Authorization'
+			] = this.getAuthToken();
+		} else {
+			delete axios.defaults.headers.common['Authorization'];
+		}
+	};
 }
 
 const storageService = new StorageService();

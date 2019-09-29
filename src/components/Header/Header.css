@@ -1,0 +1,35 @@
+.Header {
+	width: 100%;
+	background: #333;
+}
+
+.List {
+	list-style: none;
+}
+
+.Nav a {
+	display: inline-block;
+	padding: 1rem 1.25rem;
+	text-decoration: none;
+	color: white;
+}
+
+.active {
+	background: #555;
+}
+
+.Nav a:hover {
+	background: #444;
+}
+
+.rightNav {
+	float: right;
+}
+
+.rightNav .user-name {
+	color: white;
+}
+
+.home-icon {
+	width: 20px;
+}

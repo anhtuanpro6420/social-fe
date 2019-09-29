@@ -46,7 +46,6 @@ class Newsfeed extends React.Component {
 			<Layout>
 				<Header />
 				<Content style={{ padding: '50px', marginTop: 64 }}>
-					{console.log(this.props.data)}
 					{postRender}
 				</Content>
 			</Layout>

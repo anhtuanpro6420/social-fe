@@ -33,7 +33,6 @@ export const shareVideo = data => dispatch => {
 			return axios.post('/posts', post);
 		})
 		.then(res => {
-			console.log(res);
 			dispatch({
 				type: SHARE_VIDEO_SUCCESS,
 				payload: res.data

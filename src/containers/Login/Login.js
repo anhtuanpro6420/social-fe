@@ -12,7 +12,6 @@ class Login extends React.Component {
 		e.preventDefault();
 		this.props.form.validateFields((err, values) => {
 			if (!err) {
-				console.log('Received values of form: ', values);
 				this.props.login(values);
 			}
 		});
@@ -23,6 +22,7 @@ class Login extends React.Component {
 			const token = nextProps.data.token;
 			const email = nextProps.data.user.email;
 			storageService.setAuth(token, email);
+			storageService.setAuthToken();
 			this.props.history.push('/');
 		}
 	}
