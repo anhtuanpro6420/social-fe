@@ -41,7 +41,10 @@ class Newsfeed extends React.Component {
 
 					<Col lg={12} md={12} sm={24}>
 						<h3 className="title">{item.title}</h3>
-						<h4>Share by: {item.user.email}</h4>
+						<h4>
+							Share by:{' '}
+							{item && item.user ? item.user.email : null}
+						</h4>
 						<h4>Description: </h4>
 						{item.description.length > 600 ? (
 							<>
