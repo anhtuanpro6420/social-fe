@@ -15,8 +15,10 @@ class App extends React.Component {
 	componentDidMount() {
 		const token = storageService.getAuthToken();
 		const email = storageService.getCurrentUser();
-		storageService.setAuth(token, email);
-		storageService.setAuthToken();
+		if (token && email) {
+			storageService.setAuth(token, email);
+			storageService.setAuthToken();
+		}
 	}
 	render() {
 		let routes = (
