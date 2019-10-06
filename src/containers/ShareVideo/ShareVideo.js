@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { shareVideo } from '../../../src/store/actions/shareVideoAction';
 import Header from '../../components/Header/Header';
 import { PageHeader } from 'antd';
+import storageService from '../../core/services/storageService';
+import { openNotification } from '../../components/Notification/notification';
 
 const { Content } = Layout;
 
@@ -19,6 +21,19 @@ class ShareVideo extends React.Component {
 			}
 		});
 	};
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.errors && nextProps.errors.data) {
+			if (
+				nextProps.errors.status === 401 &&
+				nextProps.errors.data === 'Unauthorized'
+			) {
+				storageService.removeAuth();
+				this.props.history.push('/auth/login');
+			}
+			openNotification('error', nextProps.errors.data);
+		}
+	}
 
 	render() {
 		const { getFieldDecorator } = this.props.form;
@@ -62,8 +77,8 @@ const WrappedNormalShareVideoForm = Form.create({ name: 'normal_shareVideo' })(
 );
 
 const mapStateToProps = state => ({
+	errors: state.errors,
 	success: state.shareVideo.success,
-	error: state.shareVideo.error,
 	isLoading: state.shareVideo.isLoading,
 	data: state.shareVideo.data
 });

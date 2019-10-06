@@ -1,9 +1,7 @@
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from '../actions/types';
-import { openNotification } from '../../components/Notification/notification';
+import { LOGIN_REQUEST, LOGIN_SUCCESS } from '../actions/types';
 
 const initialState = {
 	success: false,
-	error: null,
 	data: null,
 	isLoading: false
 };
@@ -21,15 +19,6 @@ const reducer = (state = initialState, action) => {
 				success: true,
 				isLoading: false,
 				data: action.payload.data
-			};
-		}
-		case LOGIN_FAILED: {
-			openNotification('error', action.payload.message);
-			return {
-				...state,
-				success: false,
-				isLoading: false,
-				error: action.payload
 			};
 		}
 		default:

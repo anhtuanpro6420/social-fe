@@ -5,6 +5,7 @@ import { getPosts } from '../../../src/store/actions/newsfeedAction';
 import Header from '../../components/Header/Header';
 import ReactPlayer from 'react-player';
 import './Newsfeed.css';
+import { openNotification } from '../../components/Notification/notification';
 const { Content } = Layout;
 
 class Newsfeed extends React.Component {
@@ -16,6 +17,12 @@ class Newsfeed extends React.Component {
 	}
 	componentDidMount() {
 		this.props.getPosts();
+	}
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.errors && nextProps.errors.data) {
+			openNotification('error', nextProps.errors.data);
+		}
 	}
 
 	showMore = id => {
@@ -82,7 +89,7 @@ class Newsfeed extends React.Component {
 
 const mapStateToProps = state => ({
 	success: state.newsfeed.success,
-	error: state.newsfeed.error,
+	error: state.errors,
 	isLoading: state.newsfeed.isLoading,
 	data: state.newsfeed.data
 });

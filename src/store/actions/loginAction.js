@@ -1,5 +1,5 @@
 import axios from '../../axios';
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILED } from './types';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, GET_ERRORS } from './types';
 
 export const login = userData => dispatch => {
 	dispatch({
@@ -15,8 +15,8 @@ export const login = userData => dispatch => {
 		})
 		.catch(err => {
 			dispatch({
-				type: LOGIN_FAILED,
-				payload: err.response.data
+				type: GET_ERRORS,
+				payload: err.response
 			});
 		});
 };

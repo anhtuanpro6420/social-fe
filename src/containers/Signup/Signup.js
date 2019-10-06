@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { register } from '../../../src/store/actions/registerAction';
 import Header from '../../components/Header/Header';
 import { PageHeader } from 'antd';
+import { openNotification } from '../../components/Notification/notification';
 
 const { Content } = Layout;
 
@@ -21,6 +22,9 @@ class Signup extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.success) {
 			this.props.history.push('/auth/login');
+		}
+		if (nextProps.errors && nextProps.errors.data) {
+			openNotification('error', nextProps.errors.data);
 		}
 	}
 
@@ -94,7 +98,7 @@ const WrappedNormalLoginForm = Form.create({ name: 'normal_signup' })(Signup);
 
 const mapStateToProps = state => ({
 	success: state.register.success,
-	error: state.register.error,
+	error: state.errors,
 	isLoading: state.register.isLoading,
 	data: state.register.data
 });

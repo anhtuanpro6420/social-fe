@@ -1,13 +1,7 @@
-import {
-	REGISTER_REQUEST,
-	REGISTER_SUCCESS,
-	REGISTER_FAILED
-} from '../actions/types';
-import { openNotification } from '../../components/Notification/notification';
+import { REGISTER_REQUEST, REGISTER_SUCCESS } from '../actions/types';
 
 const initialState = {
 	success: false,
-	error: null,
 	data: null,
 	isLoading: false
 };
@@ -24,15 +18,6 @@ const reducer = (state = initialState, action) => {
 				...state,
 				success: true,
 				isLoading: false
-			};
-		}
-		case REGISTER_FAILED: {
-			openNotification('error', action.payload.message);
-			return {
-				...state,
-				success: false,
-				isLoading: false,
-				error: action.payload
 			};
 		}
 		default:

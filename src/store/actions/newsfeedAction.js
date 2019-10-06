@@ -1,9 +1,5 @@
 import axios from '../../axios';
-import {
-	GET_POSTS_REQUEST,
-	GET_POSTS_SUCCESS,
-	GET_POSTS_FAILED
-} from './types';
+import { GET_POSTS_REQUEST, GET_POSTS_SUCCESS, GET_ERRORS } from './types';
 
 export const getPosts = () => dispatch => {
 	dispatch({
@@ -19,8 +15,8 @@ export const getPosts = () => dispatch => {
 		})
 		.catch(err => {
 			dispatch({
-				type: GET_POSTS_FAILED,
-				payload: err.response.data
+				type: GET_ERRORS,
+				payload: err.response
 			});
 		});
 };

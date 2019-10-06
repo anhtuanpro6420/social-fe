@@ -1,9 +1,4 @@
-import {
-	GET_POSTS_REQUEST,
-	GET_POSTS_SUCCESS,
-	GET_POSTS_FAILED
-} from '../actions/types';
-import { openNotification } from '../../components/Notification/notification';
+import { GET_POSTS_REQUEST, GET_POSTS_SUCCESS } from '../actions/types';
 
 const initialState = {
 	success: false,
@@ -25,15 +20,6 @@ const reducer = (state = initialState, action) => {
 				success: true,
 				isLoading: false,
 				data: action.payload
-			};
-		}
-		case GET_POSTS_FAILED: {
-			openNotification('error', action.payload);
-			return {
-				...state,
-				success: false,
-				isLoading: false,
-				error: action.payload
 			};
 		}
 		default:

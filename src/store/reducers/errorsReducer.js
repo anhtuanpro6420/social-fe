@@ -1,12 +1,16 @@
-// import * as Types from '../actions/types';
+import * as Types from '../actions/types';
 
-// const initialState = {}
+const initialState = {};
 
-// export default function(state = initialState, action) {
-//   switch (action.type) {
-//     case Types.GET_ERRORS:
-//       return action.payload
-//     default:
-//       return state;
-//   }
-// }
+export default function(state = initialState, action) {
+	switch (action.type) {
+		case Types.GET_ERRORS:
+			console.log(action);
+			// if (action.payload.status === 401 && action.payload.data === 'Unauthorized') {
+			//     storageService.removeAuth();
+			// }
+			return action.payload;
+		default:
+			return state;
+	}
+}

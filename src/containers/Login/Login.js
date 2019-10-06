@@ -6,6 +6,7 @@ import { login } from '../../../src/store/actions/loginAction';
 import storageService from '../../core/services/storageService';
 import Header from '../../components/Header/Header';
 import { PageHeader } from 'antd';
+import { openNotification } from '../../components/Notification/notification';
 
 const { Content } = Layout;
 
@@ -26,6 +27,9 @@ class Login extends React.Component {
 			storageService.setAuth(token, email);
 			storageService.setAuthToken();
 			this.props.history.push('/');
+		}
+		if (nextProps.errors && nextProps.errors.data) {
+			openNotification('error', nextProps.errors.data);
 		}
 	}
 
@@ -99,7 +103,7 @@ const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Login);
 
 const mapStateToProps = state => ({
 	success: state.login.success,
-	error: state.login.error,
+	error: state.errors,
 	isLoading: state.login.isLoading,
 	data: state.login.data
 });

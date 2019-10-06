@@ -1,11 +1,7 @@
 import axios from '../../axios';
 import axiosOrg from 'axios';
 
-import {
-	SHARE_VIDEO_REQUEST,
-	SHARE_VIDEO_SUCCESS,
-	SHARE_VIDEO_FAILED
-} from './types';
+import { SHARE_VIDEO_REQUEST, SHARE_VIDEO_SUCCESS, GET_ERRORS } from './types';
 
 export const shareVideo = data => dispatch => {
 	const API_KEY = 'AIzaSyC7pPwgCWwV2xIBaJ6alubzQAny_P10i9M';
@@ -40,8 +36,8 @@ export const shareVideo = data => dispatch => {
 		})
 		.catch(err => {
 			dispatch({
-				type: SHARE_VIDEO_FAILED,
-				payload: err.response.data
+				type: GET_ERRORS,
+				payload: err.response
 			});
 		});
 };

@@ -1,5 +1,5 @@
 import axios from '../../axios';
-import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILED } from './types';
+import { REGISTER_REQUEST, REGISTER_SUCCESS, GET_ERRORS } from './types';
 
 export const register = userData => dispatch => {
 	dispatch({
@@ -15,8 +15,8 @@ export const register = userData => dispatch => {
 		})
 		.catch(err => {
 			dispatch({
-				type: REGISTER_FAILED,
-				payload: err.response.data
+				type: GET_ERRORS,
+				payload: err.response
 			});
 		});
 };
