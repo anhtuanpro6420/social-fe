@@ -23,7 +23,11 @@ class ShareVideo extends React.Component {
 	};
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.errors && nextProps.errors.data) {
+		if (
+			nextProps.errors &&
+			nextProps.errors.data &&
+			nextProps.errors !== this.props.errors
+		) {
 			if (
 				nextProps.errors.status === 401 &&
 				nextProps.errors.data === 'Unauthorized'

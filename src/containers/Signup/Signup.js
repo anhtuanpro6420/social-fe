@@ -23,7 +23,11 @@ class Signup extends React.Component {
 		if (nextProps.success) {
 			this.props.history.push('/auth/login');
 		}
-		if (nextProps.errors && nextProps.errors.data) {
+		if (
+			nextProps.errors &&
+			nextProps.errors.data &&
+			nextProps.errors !== this.props.errors
+		) {
 			openNotification('error', nextProps.errors.data);
 		}
 	}
@@ -98,7 +102,7 @@ const WrappedNormalLoginForm = Form.create({ name: 'normal_signup' })(Signup);
 
 const mapStateToProps = state => ({
 	success: state.register.success,
-	error: state.errors,
+	errors: state.errors,
 	isLoading: state.register.isLoading,
 	data: state.register.data
 });

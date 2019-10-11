@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Icon, Input, Button, Layout } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { login } from '../../../src/store/actions/loginAction';
+import { login } from '../../../src/store/actions/authAction';
 import storageService from '../../core/services/storageService';
 import Header from '../../components/Header/Header';
 import { PageHeader } from 'antd';
@@ -28,7 +28,11 @@ class Login extends React.Component {
 			storageService.setAuthToken();
 			this.props.history.push('/');
 		}
-		if (nextProps.errors && nextProps.errors.data) {
+		if (
+			nextProps.errors &&
+			nextProps.errors.data &&
+			nextProps.errors !== this.props.errors
+		) {
 			openNotification('error', nextProps.errors.data);
 		}
 	}
@@ -102,10 +106,10 @@ class Login extends React.Component {
 const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Login);
 
 const mapStateToProps = state => ({
-	success: state.login.success,
-	error: state.errors,
-	isLoading: state.login.isLoading,
-	data: state.login.data
+	success: state.auth.success,
+	errors: state.errors,
+	isLoading: state.auth.isLoading,
+	data: state.auth.data
 });
 
 const mapDispatchToProps = dispatch => {
