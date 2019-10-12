@@ -1,7 +1,12 @@
 import React from 'react';
-import { Layout, Row, Col, Button } from 'antd';
+import { Link } from 'react-router-dom';
+import { Layout, Row, Col, Button, Modal } from 'antd';
 import { connect } from 'react-redux';
-import { getPosts, favorites } from '../../../src/store/actions/newsfeedAction';
+import {
+	getPosts,
+	favorites,
+	getPostDetail
+} from '../../../src/store/actions/newsfeedAction';
 import { getMyInfo } from '../../../src/store/actions/authAction';
 import Header from '../../components/Header/Header';
 import ReactPlayer from 'react-player';
@@ -19,7 +24,8 @@ class Newsfeed extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			clickedPost: null
+			clickedPost: null,
+			visible: false
 		};
 	}
 	componentDidMount() {
@@ -58,8 +64,27 @@ class Newsfeed extends React.Component {
 		this.props.onFavorites(data);
 	};
 
+	handleOk = e => {
+		this.setState({
+			visible: false
+		});
+	};
+
+	handleCancel = e => {
+		this.setState({
+			visible: false
+		});
+	};
+
+	showLikes = id => {
+		this.props.showLikes(id);
+		this.setState({
+			visible: true
+		});
+	};
+
 	render() {
-		const { data } = this.props;
+		const { data, detailPost } = this.props;
 		const posts = data && data.length ? data : [];
 		const postRender = posts.map(item => {
 			return (
@@ -86,7 +111,22 @@ class Newsfeed extends React.Component {
 							shape="circle"
 							icon="star"
 						/>
-						{item.favorites.length} Likes
+						<Link onClick={() => this.showLikes(item._id)}>
+							{item.favorites.length} Likes
+						</Link>
+						<Modal
+							title="Basic Modal"
+							visible={this.state.visible}
+							onOk={this.handleOk}
+							onCancel={this.handleCancel}
+						>
+							{detailPost &&
+								detailPost.favorites &&
+								detailPost.favorites.length &&
+								detailPost.favorites.map(item => (
+									<h6>{item.email}</h6>
+								))}
+						</Modal>
 						<h4>Description: </h4>
 						{item.description.length > 600 ? (
 							<>
@@ -127,14 +167,16 @@ const mapStateToProps = state => ({
 	errors: state.errors,
 	isLoading: state.newsfeed.isLoading,
 	data: state.newsfeed.data,
-	me: state.auth.me
+	me: state.auth.me,
+	detailPost: state.newsfeed.detailPost
 });
 
 const mapDispatchToProps = dispatch => {
 	return {
 		getMyInfo: () => dispatch(getMyInfo()),
 		getPosts: () => dispatch(getPosts()),
-		onFavorites: data => dispatch(favorites(data))
+		onFavorites: data => dispatch(favorites(data)),
+		showLikes: id => dispatch(getPostDetail(id))
 	};
 };
 

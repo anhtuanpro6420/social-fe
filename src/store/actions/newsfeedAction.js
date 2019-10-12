@@ -4,7 +4,9 @@ import {
 	GET_POSTS_SUCCESS,
 	GET_ERRORS,
 	FATEVORITES_REQUEST,
-	FATEVORITES_SUCCESS
+	FATEVORITES_SUCCESS,
+	GET_POST_DETAIL_REQUEST,
+	GET_POST_DETAIL_SUCCESS
 } from './types';
 
 export const getPosts = () => dispatch => {
@@ -36,6 +38,26 @@ export const favorites = favoritesData => dispatch => {
 		.then(res => {
 			dispatch({
 				type: FATEVORITES_SUCCESS,
+				payload: res.data
+			});
+		})
+		.catch(err => {
+			dispatch({
+				type: GET_ERRORS,
+				payload: err.response
+			});
+		});
+};
+
+export const getPostDetail = id => dispatch => {
+	dispatch({
+		type: GET_POST_DETAIL_REQUEST
+	});
+	axios
+		.get(`/posts/${id}`)
+		.then(res => {
+			dispatch({
+				type: GET_POST_DETAIL_SUCCESS,
 				payload: res.data
 			});
 		})
