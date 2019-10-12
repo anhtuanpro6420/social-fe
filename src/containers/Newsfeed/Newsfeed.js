@@ -18,10 +18,16 @@ class Newsfeed extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			clickedPost: null,
-			visible: false
+			clickedPost: null
 		};
 	}
+
+	showMore = id => {
+		this.setState({
+			clickedPost: id
+		});
+	};
+
 	componentDidMount() {
 		const token = getAuthToken();
 		const email = getCurrentUser();
