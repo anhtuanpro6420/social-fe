@@ -23,12 +23,8 @@ class Signup extends React.Component {
 		if (nextProps.success) {
 			this.props.history.push('/auth/login');
 		}
-		if (
-			nextProps.errors &&
-			nextProps.errors.data &&
-			nextProps.errors !== this.props.errors
-		) {
-			openNotification('error', nextProps.errors.data);
+		if (nextProps.errors && nextProps.errors !== this.props.errors) {
+			openNotification('error', nextProps.errors.message);
 		}
 	}
 

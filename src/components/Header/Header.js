@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import storageService from '../../core/services/storageService';
+import { getCurrentUser, removeAuth } from '../../core/services/storageService';
 import './Header.css';
 import HomeIcon from '../../assets/images/home-icon.svg';
 
@@ -12,16 +12,13 @@ const header = () => (
 				Funny Movies
 			</NavLink>
 			<div className="rightNav">
-				{storageService.getCurrentUser() ? (
+				{getCurrentUser() ? (
 					<>
 						<span className="user-name">
-							Welcome {storageService.getCurrentUser()}
+							Welcome {getCurrentUser()}
 						</span>
 						<NavLink to="/share">Share Video</NavLink>
-						<NavLink
-							to="/auth/login"
-							onClick={storageService.removeAuth}
-						>
+						<NavLink to="/auth/login" onClick={removeAuth}>
 							Logout
 						</NavLink>
 					</>

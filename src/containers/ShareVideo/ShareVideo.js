@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { shareVideo } from '../../../src/store/actions/shareVideoAction';
 import Header from '../../components/Header/Header';
 import { PageHeader } from 'antd';
-import storageService from '../../core/services/storageService';
+import { removeAuth } from '../../core/services/storageService';
 import { openNotification } from '../../components/Notification/notification';
 
 const { Content } = Layout;
@@ -32,7 +32,7 @@ class ShareVideo extends React.Component {
 				nextProps.errors.status === 401 &&
 				nextProps.errors.data === 'Unauthorized'
 			) {
-				storageService.removeAuth();
+				removeAuth();
 				this.props.history.push('/auth/login');
 			}
 			openNotification('error', nextProps.errors.data);

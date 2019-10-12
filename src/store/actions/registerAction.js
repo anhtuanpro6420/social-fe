@@ -16,7 +16,7 @@ export const register = userData => dispatch => {
 		.catch(err => {
 			dispatch({
 				type: GET_ERRORS,
-				payload: err.response
+				payload: err.response.data
 			});
 		});
 };

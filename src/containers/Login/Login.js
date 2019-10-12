@@ -3,7 +3,7 @@ import { Form, Icon, Input, Button, Layout } from 'antd';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { login } from '../../../src/store/actions/authAction';
-import storageService from '../../core/services/storageService';
+import { setAuth, setAuthToken } from '../../core/services/storageService';
 import Header from '../../components/Header/Header';
 import { PageHeader } from 'antd';
 import { openNotification } from '../../components/Notification/notification';
@@ -21,19 +21,15 @@ class Login extends React.Component {
 	};
 
 	componentWillReceiveProps(nextProps) {
-		if (nextProps.success && nextProps.success !== this.props.success) {
+		if (nextProps.success && nextProps.data !== this.props.data) {
 			const token = nextProps.data.token;
 			const email = nextProps.data.user.email;
-			storageService.setAuth(token, email);
-			storageService.setAuthToken();
+			setAuth(token, email);
+			setAuthToken();
 			this.props.history.push('/');
 		}
-		if (
-			nextProps.errors &&
-			nextProps.errors.data &&
-			nextProps.errors !== this.props.errors
-		) {
-			openNotification('error', nextProps.errors.data);
+		if (nextProps.errors && nextProps.errors !== this.props.errors) {
+			openNotification('error', nextProps.errors.message);
 		}
 	}
 

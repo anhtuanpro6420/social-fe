@@ -7,7 +7,12 @@ import Header from '../../components/Header/Header';
 import ReactPlayer from 'react-player';
 import './Newsfeed.css';
 import { openNotification } from '../../components/Notification/notification';
-import storageService from '../../core/services/storageService';
+import {
+	getAuthToken,
+	getCurrentUser,
+	setAuth,
+	setAuthToken
+} from '../../core/services/storageService';
 const { Content } = Layout;
 
 class Newsfeed extends React.Component {
@@ -18,11 +23,11 @@ class Newsfeed extends React.Component {
 		};
 	}
 	componentDidMount() {
-		const token = storageService.getAuthToken();
-		const email = storageService.getCurrentUser();
+		const token = getAuthToken();
+		const email = getCurrentUser();
 		if (token && email) {
-			storageService.setAuth(token, email);
-			storageService.setAuthToken();
+			setAuth(token, email);
+			setAuthToken();
 		}
 		this.props.getMyInfo();
 		this.props.getPosts();
