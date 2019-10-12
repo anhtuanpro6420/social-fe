@@ -1,4 +1,9 @@
-import { GET_POSTS_REQUEST, GET_POSTS_SUCCESS } from '../actions/types';
+import {
+	GET_POSTS_REQUEST,
+	GET_POSTS_SUCCESS,
+	FATEVORITES_SUCCESS
+} from '../actions/types';
+import { updateHelper } from '../../core/utils/helpers';
 
 const initialState = {
 	success: false,
@@ -20,6 +25,12 @@ const reducer = (state = initialState, action) => {
 				success: true,
 				isLoading: false,
 				data: action.payload
+			};
+		}
+		case FATEVORITES_SUCCESS: {
+			return {
+				...state,
+				data: updateHelper(state, action)
 			};
 		}
 		default:

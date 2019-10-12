@@ -46,7 +46,6 @@ class Newsfeed extends React.Component {
 
 	favoritesHandler = id => {
 		const { me } = this.props;
-		console.log(me);
 		const data = {
 			postId: id,
 			user: me
@@ -55,8 +54,8 @@ class Newsfeed extends React.Component {
 	};
 
 	render() {
-		const posts =
-			this.props.data && this.props.data.length ? this.props.data : [];
+		const { data } = this.props;
+		const posts = data && data.length ? data : [];
 		const postRender = posts.map(item => {
 			return (
 				<Row key={item._id} gutter={12} style={{ paddingBottom: 24 }}>
@@ -82,6 +81,7 @@ class Newsfeed extends React.Component {
 							shape="circle"
 							icon="star"
 						/>
+						{item.favorites.length} Likes
 						<h4>Description: </h4>
 						{item.description.length > 600 ? (
 							<>
