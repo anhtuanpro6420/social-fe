@@ -38,7 +38,7 @@ const reducer = (state = initialState, action) => {
 				...state,
 				success: true,
 				isLoading: false,
-				me: action.payload.data
+				me: action.payload
 			};
 		}
 		default:

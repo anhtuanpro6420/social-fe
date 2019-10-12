@@ -46,9 +46,10 @@ class Newsfeed extends React.Component {
 
 	favoritesHandler = id => {
 		const { me } = this.props;
+		console.log(me);
 		const data = {
 			postId: id,
-			userId: me ? me : null
+			user: me
 		};
 		this.props.onFavorites(data);
 	};
@@ -121,7 +122,7 @@ const mapStateToProps = state => ({
 	errors: state.errors,
 	isLoading: state.newsfeed.isLoading,
 	data: state.newsfeed.data,
-	auth: state.auth.me
+	me: state.auth.me
 });
 
 const mapDispatchToProps = dispatch => {
