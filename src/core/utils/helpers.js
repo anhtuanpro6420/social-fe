@@ -4,3 +4,7 @@ export const updateHelper = (state, action) => {
 	currentData[index] = { ...currentData[index], ...action.payload };
 	return currentData;
 };
+
+export const deleteHelper = (state, action) => {
+	return state.data.filter(item => item._id !== action.payload);
+};

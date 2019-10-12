@@ -1,11 +1,5 @@
 import axios from '../../axios';
-import {
-	LOGIN_REQUEST,
-	LOGIN_SUCCESS,
-	GET_ERRORS,
-	GET_MY_INFO_REQUEST,
-	GET_MY_INFO_SUCCESS
-} from './types';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, GET_ERRORS } from './types';
 
 export const login = userData => dispatch => {
 	dispatch({
@@ -24,22 +18,5 @@ export const login = userData => dispatch => {
 				type: GET_ERRORS,
 				payload: err.response.data
 			});
-		});
-};
-
-export const getMyInfo = () => dispatch => {
-	dispatch({
-		type: GET_MY_INFO_REQUEST
-	});
-	axios
-		.get('/auth/me')
-		.then(res => {
-			dispatch({
-				type: GET_MY_INFO_SUCCESS,
-				payload: res.data
-			});
-		})
-		.catch(err => {
-			console.log(err);
 		});
 };
